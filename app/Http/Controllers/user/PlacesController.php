@@ -29,4 +29,17 @@ class PlacesController extends Controller
 
         return redirect()->back()->with('success', 'successfully updated location');
     }
+
+    public function delete(Request $request)
+    {
+        $request->validate([
+            'place_id'=>'required',
+        ]);
+
+
+        $place = Places::find($request->place_id);
+        $place->delete();
+
+        return redirect()->back()->with('success', 'successfully deleted a place');
+    }
 }

@@ -101,7 +101,7 @@ class MapController extends Controller
 
         //dd($latitude, $longitude);
 
-        $apiKey = 'AIzaSyDQh7KTeGZ23hjCfYKv_-GCCMit31Fu1xw';
+        $apiKey = '';
 
         $client = new Client();
 

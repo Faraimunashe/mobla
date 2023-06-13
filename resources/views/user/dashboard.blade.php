@@ -1,78 +1,54 @@
 <x-app-layout>
-    <section>
-        <div class="row">
-            <div class="col-md-6 mb-3">
-                <a href="{{route('user-places')}}">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-2 text-xl-right">
-                                    <x-icon name="map-pin" solid />
-                                </div>
-                                <div class="col-8">
-                                    <h3 class="card-title">
-                                        DISCOVER PLACES
-                                    </h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-6 mb-3">
-                <a href="{{route('user-transport')}}">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-2 text-xl-right">
-                                    <x-icon name="rectangle-group" solid />
-                                </div>
-                                <div class="col-8">
-                                    <h3 class="card-title">
-                                        CHECK TRANSPORT
-                                    </h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-6 mb-3">
-                <a href="{{route('user-emergency')}}">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-2 text-xl-right">
-                                    <x-icon name="exclamation-triangle" solid />
-                                </div>
-                                <div class="col-8">
-                                    <h3 class="card-title">
-                                        EMERGENCY SERVICES
-                                    </h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-6 mb-3">
-                <a href="">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-2 text-xl-right">
-                                    <x-icon name="share" solid />
-                                </div>
-                                <div class="col-8">
-                                    <h3 class="card-title">
-                                        SHARE PLACES
-                                    </h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
+    <div class="row mt-4">
+        <div class="col-md-12 mb-3">
+            @if ($errors->any())
+                <div class="alert alert-danger" role="alert">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+            @if (Session::has('error'))
+                <div class="alert alert-danger" role="alert">
+                    {{Session::get('error')}}
+                </div>
+            @endif
+            @if (Session::has('success'))
+                <div class="alert alert-success" role="alert">
+                    {{Session::get('success')}}
+                </div>
+            @endif
         </div>
-    </section>
+        @foreach ($places as $place)
+            <div class="col-12" id="yyy">
+                <div class="card mb-4 ">
+                    <div class="d-flex">
+                        <div class="icon icon-shape icon-lg bg-gradient-success shadow text-center border-radius-xl mt-n3 ms-4">
+                            <i class="fa fa-map opacity-10" aria-hidden="true"></i>
+                        </div>
+                        <h4 class="mt-3 mb-2 ms-3 ">{{$place->address}}</h4>
+
+                    </div>
+                    <div class="card-body p-3">
+                        <div class="row">
+                            <div class="col-8"></div>
+                            <div class="col-4">
+                                <a href="{{route('user-place',$place->id)}}" class="btn btn-dark btn-sm">
+                                    <i class="fa fa-eye"></i>
+                                </a>
+                                <a class="btn btn-success btn-sm"  href="https://api.whatsapp.com/send?text={{ urlencode($place->address) }} {{ urlencode($place->id) }}">
+                                    <i class="fa fa-share-alt"></i>
+                                </a>
+                                <a class="btn btn-primary btn-sm" href="https://www.google.com/maps/search/?api=1&query={{ $place->lat }},{{ $place->lon }}">
+                                    <i class="fa fa-map"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+    </div>
 </x-app-layout>

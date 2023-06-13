@@ -15,10 +15,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('login');
 });
 
 Route::get('/dashboard', 'App\Http\Controllers\DashboardController@index')->middleware(['auth'])->name('dashboard');
+Route::post('/nearest-service', 'App\Http\Controllers\admin\EmergencyController@index')->middleware(['auth'])->name('nearest-service');
 
 
 Route::middleware('auth')->group(function () {
@@ -27,23 +28,22 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::group(['middleware' => ['auth', 'role:admin']], function(){
+    Route::get('/admin/dashboard', 'App\Http\Controllers\admin\DashboardController@index')->name('admin-dashboard');
+    Route::post('/admin/add-actictivity', 'App\Http\Controllers\admin\DashboardController@add_activity')->name('admin-add-activity');
+
+    Route::get('/admin/places', 'App\Http\Controllers\user\PlacesController@index')->name('admin-places');
+    Route::get('/admin/place/{id}', 'App\Http\Controllers\admin\PlaceController@index')->name('admin-place');
+    Route::post('/admin/add-places', 'App\Http\Controllers\user\PlacesController@add')->name('admin-add-places');
+    Route::post('/admin/delete-place', 'App\Http\Controllers\user\PlacesController@delete')->name('admin-delete-place');
+    Route::post('/admin/add-transport', 'App\Http\Controllers\admin\DashboardController@add_transport')->name('admin-add-transport');
+
+});
+
 Route::group(['middleware' => ['auth', 'role:user']], function(){
     Route::get('/user/dashboard', 'App\Http\Controllers\user\DashboardController@index')->name('user-dashboard');
 
-    Route::get('/user/places', 'App\Http\Controllers\user\PlacesController@index')->name('user-places');
-    Route::post('/user/add-places', 'App\Http\Controllers\user\PlacesController@add')->name('user-add-places');
-
-    Route::get('/user/public-transport', 'App\Http\Controllers\user\TransportController@index')->name('user-transport');
-
-    Route::get('/user/emergency-services', 'App\Http\Controllers\user\EmergencyController@index')->name('user-emergency');
-
-    Route::get('/nearest-hospital', 'App\Http\Controllers\MapController@nearestHospital')->name('user-hospital');
-
-    Route::get('/nearest-police', 'App\Http\Controllers\MapController@nearestPolice')->name('user-police');
-
-    Route::get('/nearest-airport', 'App\Http\Controllers\MapController@nearestAirport')->name('user-airport');
-
-    Route::get('/nearest-railway', 'App\Http\Controllers\MapController@nearestRailway')->name('user-railway');
+    Route::get('/user/place/{id}', 'App\Http\Controllers\user\PlaceController@index')->name('user-place');
 });
 
 

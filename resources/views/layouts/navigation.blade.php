@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-white py-3">
     <div class="container">
-      <a class="navbar-brand" href="{{route('dashboard')}}" rel="tooltip" title="Designed and Coded by Creative Tim" data-placement="bottom" target="_blank">
-        Discover Zim
+      <a class="navbar-brand" href="{{route('dashboard')}}">
+        <h3>Discover Zim</h3>
       </a>
       <button class="navbar-toggler shadow-none ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon mt-2">
@@ -12,7 +12,7 @@
       </button>
       <div class="collapse navbar-collapse w-100 pt-3 pb-2 py-lg-0 ms-lg-12 ps-lg-5" id="navigation">
         <ul class="navbar-nav navbar-nav-hover ms-auto">
-          <li class="nav-item dropdown dropdown-hover mx-2 ms-lg-5">
+          {{-- <li class="nav-item dropdown dropdown-hover mx-2 ms-lg-5">
             <a class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center" id="dropdownMenuPages5" data-bs-toggle="dropdown" aria-expanded="false">
                 Options
                 <img src="{{asset('assets/img/down-arrow-dark.svg')}}" alt="down-arrow" class="arrow ms-auto ms-md-2">
@@ -45,7 +45,7 @@
                 </a>
               </div>
             </div>
-          </li>
+          </li> --}}
           <li class="nav-item ms-lg-auto">
             <a class="nav-link nav-link-icon me-2" href="" >
                 <i class="fa fa-user me-1"></i>

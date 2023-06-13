@@ -23,7 +23,7 @@
                 @endif
             </div>
         </div>
-        <form action="{{route('user-add-places')}}" method="POST">
+        <form action="{{route('admin-add-places')}}" method="POST">
             @csrf
             <div class="form-group">
                 <label for="address_address">Address</label>
