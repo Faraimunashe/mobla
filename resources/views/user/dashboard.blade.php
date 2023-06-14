@@ -21,6 +21,15 @@
                 </div>
             @endif
         </div>
+        <form action="{{route('user-dashboard')}}" method="POST">
+            @csrf
+            <div class="col-12 mb-3 m-2">
+                <div class="input-group input-group-outline my-3 row">
+                    <input type="text" name="search" class="form-control col-8" placeholder="Search place" required>
+                    <button class="btn btn-primary ml-2 col-3" type="submit">Search</button>
+                </div>
+            </div>
+        </form>
         @foreach ($places as $place)
             <div class="col-12" id="yyy">
                 <div class="card mb-4 ">

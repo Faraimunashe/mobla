@@ -42,6 +42,7 @@ Route::group(['middleware' => ['auth', 'role:admin']], function(){
 
 Route::group(['middleware' => ['auth', 'role:user']], function(){
     Route::get('/user/dashboard', 'App\Http\Controllers\user\DashboardController@index')->name('user-dashboard');
+    Route::post('/user/dashboard', 'App\Http\Controllers\user\DashboardController@index')->name('user-dashboard');
 
     Route::get('/user/place/{id}', 'App\Http\Controllers\user\PlaceController@index')->name('user-place');
 });

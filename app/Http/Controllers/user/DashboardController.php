@@ -8,9 +8,14 @@ use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $places = Places::all();
+        if($request->method() == "POST")
+        {
+            $places = Places::where('address', 'LIKE', '%'.$request->search.'%')->get();
+        }
+
         return view('user.dashboard', [
             'places' => $places
         ]);
